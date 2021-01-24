@@ -3,7 +3,7 @@ import Axios from "axios";
 import {navigate} from "@reach/router"
 
 
-const NewProcuct = () => {
+const NewProduct = () => {
     const [productInfo, setProductInfo] = useState({
         title:"",
         price:0,
@@ -66,4 +66,4 @@ const NewProcuct = () => {
 };
 
 
-export default NewProcuct;
+export default NewProduct;
