@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 // use Axios to call on the api instead of using postman
 import Axios from "axios";
-import { Link, navigate } from "@reach/router";
+import { Link } from "@reach/router";
 
 
 const Main = () => {

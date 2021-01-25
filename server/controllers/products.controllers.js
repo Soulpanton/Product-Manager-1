@@ -32,7 +32,7 @@ module.exports.updateProduct = (req, res) => {
             useFindAndModify: false
         })
         .then(updatedProduct => res.json({ results: updatedProduct }))
-        .catch(err => res.json({ err }))
+        .catch(err => res.json(err))
 }
 
 module.exports.findRandomProduct = (req, res) => {

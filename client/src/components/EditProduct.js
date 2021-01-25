@@ -10,6 +10,8 @@ function EditProduct(props) {
         description: ""
     })
 
+    const [errors, setErrors] = useState({})
+
     // to make an api call on loading of the page
     useEffect(() => {
         Axios.get(`http://localhost:8000/api/products/${props.productId}`)
@@ -35,7 +37,13 @@ function EditProduct(props) {
         Axios.put(`http://localhost:8000/api/products/update/${props.productId}`, productDetails)
             .then(response => {
                 console.log("Just updated the info on the for its right here:", response)
-                navigate("/")
+                if (response.data.results) {
+                    navigate("/")
+                }
+                else {
+                    setErrors(response.data.errors)
+
+                }
             })
             .catch(err => console.log("err on trying to update info", err))
     }
@@ -53,6 +61,7 @@ function EditProduct(props) {
                 <div>
                     <label htmlFor="">Price $</label>
                     <input type="number" step="0.01" name="price" id="" value={productDetails.price.$numberDecimal} onChange={changeHandler} />
+
                 </div>
 
                 <div>
