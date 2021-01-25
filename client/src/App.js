@@ -3,6 +3,7 @@ import Main from "./components/Main";
 import { Link, Router } from "@reach/router";
 import NewProduct from "./components/NewProduct";
 import ProductInfo from "./components/ProductInfo";
+import EditProduct from "./components/EditProduct";
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <NewProduct path="/new"></NewProduct>
         {/* finds the route with a variable passed and goes to the matching component */}
         <ProductInfo path="/products/:productId"></ProductInfo>
+        <EditProduct path="/products/edit/:productId"></EditProduct>
       </Router>
     </div>
   );

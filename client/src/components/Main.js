@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 // use Axios to call on the api instead of using postman
 import Axios from "axios";
-import { Link } from "@reach/router";
+import { Link, navigate } from "@reach/router";
 
 
 const Main = () => {
     // useState is an array here cause the response is an array of product objects
     const [allproducts, setallproducts] = useState([])
+
+    const [deleteClicked, setDeleteClicked] = useState(false)
 
     useEffect(() => {
         // making a call to this route
@@ -18,7 +20,20 @@ const Main = () => {
                 setallproducts(response.data.results)
             })
             .catch(err => console.log(err))
-    }, [])
+    }, [deleteClicked])
+
+    const deleteClickHandler = (e, productId) => {
+        console.log("deleting product from list number:", productId)
+        Axios.delete(`http://localhost:8000/api/products/destroy/${productId}`)
+            .then(response => {
+                console.log("just deleted item number", productId)
+                setDeleteClicked(!deleteClicked)
+
+            })
+            .catch(err => console.log(err))
+    }
+
+
     return (
         <div>
             <table className="table table-danger col-8 mx-auto">
@@ -41,7 +56,13 @@ const Main = () => {
                                 <td>{product.description}</td>
                                 {/* this link sends us to that route with the _id from the models */}
                                 {/* going to App.js and finding a matching route on the <Router> */}
-                                <td><Link className="btn btn-info" to={`/products/${product._id}`}>View Product</Link></td>
+                                <td>
+                                    <Link className="btn btn-info m-1" to={`/products/${product._id}`}>View Product</Link>
+                                    <Link className="btn btn-info m-1" to={`/products/edit/${product._id}`}>Edit Product</Link>
+                                    <button className="btn btn-info m-1" onClick={(e) => deleteClickHandler(e, product._id)}>Delete Product</button>
+
+                                </td>
+
 
                             </tr>
                         })
