@@ -29,6 +29,7 @@ const ProductInfo = (props) => {
             .catch(err => console.log("ERROOOORRRRRRRRRR", err))
     }, [])
     return (
+
         <div>
             <h3>Heres the info about that product</h3>
             {/* info passed through pros */}
